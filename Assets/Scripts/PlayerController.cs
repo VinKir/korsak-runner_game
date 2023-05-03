@@ -16,15 +16,20 @@ public class PlayerController : MonoBehaviour
     bool isMoving = false;
     float lastVectorX;
     Coroutine movingCoroutine;
-
-    public float laneOffset = 1.5f;
+    bool isJumping = false;
+    float jumpPower = 15;
+    float jumpGravity = -40;
+    float realGravity = -9.8f;
+    float laneOffset;
 
     void Start()
     {
+        laneOffset = MapGenerator.instance.laneOffset;
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
         startGamePosition = transform.position;
         startGameRotation = transform.rotation;
+        SwipeManager.instance.MoveEvent += MovePlayer;
     }
 
     // Update is called once per frame
@@ -38,8 +43,45 @@ public class PlayerController : MonoBehaviour
         {
             MoveHorizontal(laneChangeSpeed);
         }
+        if (Input.GetKeyDown(KeyCode.W) && !isJumping)
+        {
+            Jump();
+        }
     }
 
+    void MovePlayer(bool[] swipes)
+    {
+        if (swipes[(int)SwipeManager.Direction.Left] && pointFinish > -laneOffset)
+        {
+            MoveHorizontal(-laneChangeSpeed);
+        }
+        if (swipes[(int)SwipeManager.Direction.Right] && pointFinish < laneOffset)
+        {
+            MoveHorizontal(laneChangeSpeed);
+        }
+        if (swipes[(int)SwipeManager.Direction.Up] && !isJumping)
+        {
+            Jump();
+        }
+    }
+
+    void Jump()
+    {
+        isJumping = true;
+        rb.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
+        Physics.gravity = new Vector3(0, jumpGravity, 0);
+        StartCoroutine(StopJumpCoroutine());
+    }
+
+    IEnumerator StopJumpCoroutine()
+    {
+        do
+        {
+            yield return new WaitForFixedUpdate();
+        } while (rb.velocity.y != 0);
+        isJumping = false;
+        Physics.gravity = new Vector3(0, realGravity, 0);
+    }
 
     void MoveHorizontal(float speed)
     {

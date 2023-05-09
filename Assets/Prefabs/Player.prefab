@@ -380,10 +380,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 6384567795404984958}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c013a4f5d88828547a6e381861933e97, type: 3}
+  m_Script: {fileID: 11500000, guid: 90bd271b94d43a64fb5c72a37a76ad75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  laneOffset: 1.5
 --- !u!95 &6384567795404984901
 Animator:
   serializedVersion: 5

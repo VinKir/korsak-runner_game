@@ -21,7 +21,7 @@ public class MapGenerator : MonoBehaviour
 
     void Start()
     {
-        maps.Add(MakeMap1());
+       // maps.Add(MakeMap1());
     }
 
     void Update()

@@ -66,5 +66,7 @@ public class RoadGenerator : MonoBehaviour
         for (int i = 0; i < maxRoadCount; i++)
             CreateNextRoad();
         SwipeManager.instance.enabled = false;
+
+        MapGenerator.instance.ResetMaps();
     }
 }

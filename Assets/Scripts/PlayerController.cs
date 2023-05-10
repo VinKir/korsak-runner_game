@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     float lastVectorX;
     Coroutine movingCoroutine;
     bool isJumping = false;
-    float jumpPower = 15;
+    float jumpPower = 11;
     float jumpGravity = -40;
     float realGravity = -9.8f;
     float laneOffset;
@@ -112,10 +112,12 @@ public class PlayerController : MonoBehaviour
     public void StartGame()
     {
         RoadGenerator.instance.StartLevel();
+        animator.SetBool("run", true);
     }
 
     public void ResetGame()
     {
+        animator.SetBool("run", false);
         rb.velocity = Vector3.zero;
         pointFinish = 0;
         pointStart = 0;

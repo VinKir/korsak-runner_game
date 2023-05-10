@@ -431,6 +431,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbb280f3ff2580c4f96755e686444bcd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemSpace: 10
+  itemCountInMap: 5
   ObstaclesTopPrefab:
   - {fileID: 7836801986389237514, guid: ed69bef220a1784459863724f4b3031c, type: 3}
   ObstaclesBottomPrefab:

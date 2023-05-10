@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class MapGenerator : MonoBehaviour
 {
-    int itemSpace = 15;
-    int itemCountInMap = 5;
+    public int itemSpace = 10;
+    public int itemCountInMap = 5;
     int mapSize;
     enum TrackPos { Left = -1, Center = 0, Right = 1 }
 
@@ -25,9 +25,8 @@ public class MapGenerator : MonoBehaviour
         instance = this;
 
         mapSize = itemCountInMap * itemSpace;
-        maps.Add(MakeMap1());
-        maps.Add(MakeMap1());
-        maps.Add(MakeMap1());
+        maps.Add(MakeMap2());
+        maps.Add(MakeMap3());
         foreach (var map in maps)
             map.SetActive(false);
     }
@@ -96,6 +95,52 @@ public class MapGenerator : MonoBehaviour
         }
         return result;
     }
+
+    private GameObject MakeMap2()
+    {
+        GameObject result = new GameObject("Map1");
+        result.transform.parent = this.transform;
+        for (int i = 0; i < itemCountInMap; i++)
+        {
+            GameObject obstacle = null;
+            TrackPos trackPos = TrackPos.Center;
+
+            if (i == 0) { trackPos = TrackPos.Center; obstacle = ObstaclesBottomPrefab[Random.Range(0, ObstaclesBottomPrefab.Count)]; }
+            if (i == 1) { trackPos = TrackPos.Center; obstacle = ObstaclesTopPrefab[Random.Range(0, ObstaclesTopPrefab.Count)]; }
+            if (i == 2) { trackPos = TrackPos.Left; obstacle = ObstaclesFullPrefab[Random.Range(0, ObstaclesFullPrefab.Count)]; }
+            if (i == 3) { trackPos = TrackPos.Right; obstacle = ObstaclesFullPrefab[Random.Range(0, ObstaclesFullPrefab.Count)]; }
+            if (i == 4) { trackPos = TrackPos.Center; obstacle = ObstaclesFullPrefab[Random.Range(0, ObstaclesFullPrefab.Count)]; }
+
+            Vector3 obstaclePos = new Vector3((int)trackPos * laneOffset, 0, i * itemSpace);
+            if (obstacle != null)
+                Instantiate(obstacle, obstaclePos, Quaternion.identity, result.transform);
+        }
+        return result;
+    }
+
+    private GameObject MakeMap3()
+    {
+        GameObject result = new GameObject("Map1");
+        result.transform.parent = this.transform;
+        for (int i = 0; i < itemCountInMap; i++)
+        {
+            GameObject obstacle = null;
+            TrackPos trackPos = TrackPos.Center;
+
+            if (i == 0) { trackPos = TrackPos.Left; obstacle = ObstaclesBottomPrefab[Random.Range(0, ObstaclesBottomPrefab.Count)]; }
+            if (i == 1) { trackPos = TrackPos.Left; obstacle = ObstaclesTopPrefab[Random.Range(0, ObstaclesTopPrefab.Count)]; }
+            if (i == 2) { trackPos = TrackPos.Right; obstacle = ObstaclesFullPrefab[Random.Range(0, ObstaclesFullPrefab.Count)]; }
+            if (i == 3) { trackPos = TrackPos.Right; obstacle = ObstaclesFullPrefab[Random.Range(0, ObstaclesFullPrefab.Count)]; }
+            if (i == 4) { trackPos = TrackPos.Left; obstacle = ObstaclesFullPrefab[Random.Range(0, ObstaclesFullPrefab.Count)]; }
+
+            Vector3 obstaclePos = new Vector3((int)trackPos * laneOffset, 0, i * itemSpace);
+            if (obstacle != null)
+                Instantiate(obstacle, obstaclePos, Quaternion.identity, result.transform);
+        }
+        return result;
+    }
+
+
     GameObject RandomObstacle()
     {
         GameObject res = ObstaclesBottomPrefab[0];

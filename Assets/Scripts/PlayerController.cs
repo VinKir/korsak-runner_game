@@ -6,6 +6,11 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    // Добавить жизни герою
+    // сделать вопросы
+    // правильные вопросы добавляют жизни герою
+
+
     Animator animator;
     Rigidbody rb;
     Vector3 startGamePosition;

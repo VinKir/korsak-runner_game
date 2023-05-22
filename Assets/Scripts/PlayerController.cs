@@ -1,15 +1,16 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
     // Добавить жизни герою
     // сделать вопросы
     // правильные вопросы добавляют жизни герою
-
 
     Animator animator;
     Rigidbody rb;
@@ -27,8 +28,24 @@ public class PlayerController : MonoBehaviour
     float realGravity = -9.8f;
     float laneOffset;
 
+    public int StartHP = 3;
+    int hp;
+    public int HP
+    {
+        get { return hp; }
+        set
+        {
+            hp = value;
+            hpText.text = hp.ToString();
+            if (hp <= 0)
+                ResetGame();
+        }
+    }
+    public TextMeshProUGUI hpText;
+
     void Start()
     {
+        HP = StartHP;
         laneOffset = MapGenerator.instance.laneOffset;
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
@@ -129,12 +146,16 @@ public class PlayerController : MonoBehaviour
         RoadGenerator.instance.ResetLevel();
         transform.position = startGamePosition;
         transform.rotation = startGameRotation;
+        HP = StartHP;
+        hpText.text = HP.ToString();
     }
 
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Lose")
-            ResetGame();
+            HP--;
+        else if (other.gameObject.tag == "RightAnswer")
+            HP++;
     }
 
     void OnCollisionEnter(Collision collision)

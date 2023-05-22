@@ -1,0 +1,20 @@
+[
+  {
+    "Question": "На какие виды делится программирование?",
+    "Answers": [
+      { "answer": "Системное и операционное" },
+      { "answer": "Системное и прикладное" },
+      { "answer": "Прикладное и инструментальное" }
+    ],
+    "RightAnswerNumber": 1
+  },
+  {
+    "Question": "asfdsfdfе?",
+    "Answers": [
+      { "answer": "dgfsghfsе" },
+      { "answer": "Систuykrtдное" },
+      { "answer": "Прtrujyтальное" }
+    ],
+    "RightAnswerNumber": 2
+  }
+]

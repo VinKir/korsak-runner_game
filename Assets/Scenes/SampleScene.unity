@@ -710,14 +710,13 @@ MonoBehaviour:
   itemSpace: 10
   itemCountInMap: 5
   ObstaclesTopPrefab:
-  - {fileID: 7836801986389237514, guid: ed69bef220a1784459863724f4b3031c, type: 3}
+  - {fileID: 7836801986389237514, guid: bdf61167cfd95b940b0d07d594adbe4f, type: 3}
   ObstaclesBottomPrefab:
   - {fileID: 7836801986389237514, guid: 21f0d24d9e8766b4f8e09244c5137dc5, type: 3}
-  - {fileID: 7275287146391965352, guid: 41d1f7f0b04e67b499c83e4987835b95, type: 3}
   ObstaclesFullPrefab:
-  - {fileID: 7836801986389237514, guid: 2affbe189ce8bba44bea6b51349e485e, type: 3}
-  ObstacleRightAnswerPrefab: {fileID: 7836801986389237514, guid: 583bd520f7a551249bf86db3a9a47241, type: 3}
-  laneOffset: 1.5
+  - {fileID: 7275287146391965352, guid: 41d1f7f0b04e67b499c83e4987835b95, type: 3}
+  ObstacleRightAnswerPrefab: {fileID: 7275287146391965352, guid: 8c329ea7ccf472a4a9b818a6ec541247, type: 3}
+  laneOffset: 1.95
   maps: []
   activeMaps: []
 --- !u!4 &1133191453

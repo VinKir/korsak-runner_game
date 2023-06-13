@@ -10,9 +10,10 @@ public class RoadGenerator : MonoBehaviour
     public int roadSegmentLength = 10;
     public List<GameObject> roadPrefabs;
     List<GameObject> currentRoads = new List<GameObject>();
-    public float maxSpeed = 10;
+    public float startSpeed = 10;
     public float speed = 10;
     public int maxRoadCount = 6;
+    public int maxSpeed = 32;
 
     private void Awake()
     {
@@ -34,13 +35,14 @@ public class RoadGenerator : MonoBehaviour
         {
             Destroy(currentRoads[0]);
             currentRoads.RemoveAt(0);
+            speed = Math.Min(speed + 0.05f - (startSpeed - speed) * 0.01f, maxSpeed);
             CreateNextRoad();
         }
     }
 
     public void StartLevel()
     {
-        speed = maxSpeed;
+        speed = startSpeed;
         SwipeManager.instance.enabled = true;
     }
 

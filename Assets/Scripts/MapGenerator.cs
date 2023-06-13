@@ -60,6 +60,9 @@ public class MapGenerator : MonoBehaviour
         maps.Add(MakeMap1());
         maps.Add(MakeMap1());
         maps.Add(MakeMap1());
+        maps.Add(MakeMap1());
+        maps.Add(MakeMap1());
+        maps.Add(MakeMap1());
         foreach (var map in maps)
             map.SetActive(false);
     }
@@ -180,14 +183,22 @@ public class MapGenerator : MonoBehaviour
         result.transform.parent = this.transform;
         for (int i = 0; i < itemCountInMap; i++)
         {
-            GameObject obstacle = null;
-            TrackPos trackPos = TrackPos.Center;
+            GameObject obstacle;
+            TrackPos trackPos;
+            var tracks = new List<TrackPos>() { TrackPos.Left, TrackPos.Center, TrackPos.Right };
+            for (int j = 0; j < Random.Range(1, 3); j++)
+            {
+                if (true)
+                {
+                    trackPos = tracks[Random.Range(0, tracks.Count)];
+                    tracks.Remove(trackPos);
+                    obstacle = RandomObstacle();
+                }
 
-            if (true) { trackPos = (TrackPos)Random.Range(-1, 2); obstacle = RandomObstacle(); }
-
-            Vector3 obstaclePos = new Vector3((int)trackPos * laneOffset, 0, i * itemSpace);
-            if (obstacle != null)
-                Instantiate(obstacle, obstaclePos, Quaternion.identity, result.transform);
+                Vector3 obstaclePos = new Vector3((int)trackPos * laneOffset, 0, i * itemSpace);
+                if (obstacle != null)
+                    Instantiate(obstacle, obstaclePos, Quaternion.identity, result.transform);
+            }
         }
         return result;
     }

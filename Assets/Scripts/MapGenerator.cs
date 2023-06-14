@@ -164,7 +164,7 @@ public class MapGenerator : MonoBehaviour
             if (i == itemCountInMap - 1)
                 for (int j = -1; j < 2; j++)
                 {
-                    if (j + 1 == rightWay)
+                    if (j + 1 != rightWay)
                         obstacle = ObstacleRightAnswerPrefab;
                     else
                         obstacle = ObstaclesFullPrefab[0];
@@ -173,6 +173,7 @@ public class MapGenerator : MonoBehaviour
                     if (obstacle != null)
                         Instantiate(obstacle, obstaclePos, Quaternion.identity, result.transform);
                 }
+            
         }
         return result;
     }

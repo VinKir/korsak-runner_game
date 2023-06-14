@@ -164,16 +164,21 @@ public class MapGenerator : MonoBehaviour
             if (i == itemCountInMap - 1)
                 for (int j = -1; j < 2; j++)
                 {
-                    if (j + 1 != rightWay)
-                        obstacle = ObstacleRightAnswerPrefab;
-                    else
-                        obstacle = ObstaclesFullPrefab[0];
+                    obstacle = ObstacleRightAnswerPrefab;
                     trackPos = (TrackPos)j;
                     Vector3 obstaclePos = new Vector3((int)trackPos * laneOffset, 0, i * itemSpace);
+                    GameObject go = null;
                     if (obstacle != null)
-                        Instantiate(obstacle, obstaclePos, Quaternion.identity, result.transform);
+                    {
+                        go = Instantiate(obstacle, obstaclePos, Quaternion.identity, result.transform);
+                        if (j + 1 != rightWay)
+                        {
+                            Debug.Log(go.transform.GetChild(0).name);
+                            go.transform.GetChild(0).GetChild(0).tag = "Lose";
+                        }
+                    }
                 }
-            
+
         }
         return result;
     }
